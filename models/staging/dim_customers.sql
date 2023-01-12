@@ -1,9 +1,3 @@
-{{
-    config(
-        materialized = 'table'
-    )
-}}
-
 with customers as (
     select * from {{ ref('stg_customers') }}
 )
@@ -25,6 +19,14 @@ with customers as (
     group by 1
 )
 
+, value as(
+    select 
+        customer_id
+        , sum(amount) as lifetime_value
+    from fct_orders
+    group by 1
+)
+
 , final as (
 
     select 
@@ -34,10 +36,12 @@ with customers as (
         , customer_orders.first_order_date
         , customer_orders.most_recent_order_date
         , coalesce(customer_orders.number_of_orders, 0) as number_of_orders
+        , value.lifetime_value
     
     from customers
 
     left join customer_orders using(customer_id)
+    join value using(customer_id)
 )
 
 select * from final
