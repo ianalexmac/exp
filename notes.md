@@ -26,3 +26,34 @@ model types
         person, place, or thing
         users, companies, products, customers
         
+
+
+tests
+    very important! build trust!
+
+
+
+    genaric tests
+        highly-scalable
+        few lines of yaml code
+        
+        four tests that come with dbt:
+            - unique            every value in column is unique (primary keys)
+            - not null          every value in column is not null (primary keys)
+            - accepted_values   every value in column is from given list
+            - relationships     every value in column exists in the column of another referenced table
+        
+    other tests available in custom packages
+
+    singular tests
+        very specific
+        one or two models
+        tests something very specific
+        cannot copy/paste to other models
+            
+        ex: are all accounts positive?
+    
+    dont forget to test raw data!
+        located in src_something.yml (src_jaffle_shop.yml) or /tests
+
+    
