@@ -4,7 +4,7 @@ with orders as (
     select * from {{ ref('stg_orders') }}
 )
 
-, payments as (
+, order_payments as (
     select * from {{ ref('stg_payments') }}
 )
 
@@ -12,10 +12,11 @@ with orders as (
     select 
         orders.order_id
         , orders.customer_id
-        , payments.amount
+        , orders.order_date
+        , coalesce(order_payments.amount, 0) as amount
     
     from orders
-    join payments using(order_id)
+    left join order_payments using(order_id)
 )
 
 select * from final
