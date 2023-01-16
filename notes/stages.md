@@ -70,6 +70,20 @@ stage 4: adolescence
     why?: increase dbt's surface area and influence at your org
     what if I don't?: will lose stakeholder buy-in!
 
+    packages!
+        reduce dev time
+        optimizations
+        metadata
+
+stage 5: adulthood
+    theme: self-reflection
+    solidifying our projects place in the world
+
+    goals?: improve dbt as a product
+    how?: more metadata
+          mature dbt's relationships to other tool in the stack
+    why?: more observability, more control
+    what if I don't?: an unobserved dbt project is not worth running
 
 
     
