@@ -39,6 +39,45 @@ what to tests and why
         auditing your changes while in development
             ex: audit_helper package, compares refactored model to legacy model
 
+debugging:
+    run <dbt test>
+    test fails
+    view logs -> click into debug logs
+    find the SQL that was run
+    copy the correct part of it
+    paste it into a statements tab
+    preview data to see what rows failed
+
+    better way: --store-failures flag
+
+
+four major testing points:
+
+    development:
+        critical to test after changing logic in models
+        find bugs as early as possible, before pull request
+
+    production: 
+        important to catch failures when the happen
+        empowers data team to catch quality issues before stakeholders are impacted
+
+    pull request:
+        run automated tests against changes to catch issues before merge
+
+    on middle/QA branch (if exists):
+        test a batch of changes before merging to the main branch
+
+
+
+p.s.:
+    can be very helpful to store-failures for future reference!
+    dbt test --store-failures
+        can be configured on a model or project level!
+
+            tests:
+             +store_failures: true  # all tests
+
+
 
 
 
