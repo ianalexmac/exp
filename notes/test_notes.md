@@ -78,7 +78,18 @@ p.s.:
              +store_failures: true  # all tests
 
 
+packages!
+        dbt_utils
+                lots of great tools 
 
+        dbt_expectations
+                expect column 'amount' of table 'orders' to be < 0      T/F
+
+        dbt_audit_helper
+                suuuper useful when making big changes to models
+                can compare two tables and test for similarities
+                        model_depricated =?= model   --->   percent match
+                        
 
 
 

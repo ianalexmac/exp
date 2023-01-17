@@ -21,6 +21,7 @@ models:
     description: orders
     columns:
       - name: order_id
+        description: primary key for orders
         tests: 
           - unique
           - not_null
@@ -28,10 +29,15 @@ models:
         tests:
           - not_null
       - name: amount
-    tests:
-      - average_dollars_spent_greater_than_one:
-          column_name: amount
-          group_by_column: customer_id
+        description: dollars spent per order
+        tests:
+          - average_dollars_spent_greater_than_one:
+              group_by_column: customer_id
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              row_condition: "order_id is not null"
+
+
 
   - name: int_orders__pivoted
     description: orders table pivoted by amount per payment method
