@@ -9,7 +9,29 @@ sources:
         columns:
           - name: id
             tests:
-              - unique
+              - unique:
+                  config:
+                    severity: error
+                    error_if: ">100"
+                    warn_if: ">10"
               - not_null
+          - name: payment
+            columns: 
+              - name: paymentmethod
+                tests:
+                  - accepted_values:
+                      values: ['credit_card', 'coupon', 'bank_transfer', 'gift_card']
+                      config:
+                        where: "status != 'fail'"
+              - name: status
+                tests:
+                  - accepted_values:
+                      values: ['success', 'fail']
+                      config:
+                        limit: 10
+                        store_failures: true
+                        schema: status_test_fails
+
+
 
 

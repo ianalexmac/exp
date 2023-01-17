@@ -1,5 +1,15 @@
 tests!
 
+dbt ships with four generic tests:  
+            unique
+            not_null
+            accepted_values
+            relationships
+
+
+
+
+
 should be:
     Automated: low effort, repeatable
     Fast!: if testing takes too long, no one will do it
@@ -89,7 +99,50 @@ packages!
                 suuuper useful when making big changes to models
                 can compare two tables and test for similarities
                         model_depricated =?= model   --->   percent match
-                        
 
+
+test configurations:
+    can be configured in: .yml file
+                          config file for singular tests
+                          generic test definition in macros or tests/generic
+                          dbt_project.yml for project/package level definition
+    
+
+        severity and threshold
+                failing test can throw warning or error
+                can throw warning until threshold, then error (ex: over 100 failing records)
+                tests:  
+                    - not_null:
+                        config:
+                            severity: error
+                            error_if: ">100"
+
+        where clause
+            under the config block
+            must be in quotes
+            just like SQL
+                        config:
+                            where: "order_date > '2018-03-01'"
+
+        limit config
+            just like SQL limit
+            good for dev, don't need to know that 10,000 test records failed: 10 will do
+                        config:
+                            limit: 10
+        
+        store failures for tests
+            config:
+                store_failures: True
+                schema: test_failures  (optional, can specify where outputted)
+
+
+        store test configurations at the project level
+                dbt_project.yml file
+
+                    tests:
+                        jaffle_shop:
+                            +severity: warn
+                            +store_failures: true
+                    
 
 
